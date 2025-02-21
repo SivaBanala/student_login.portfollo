@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Details Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      text-align: center;
+    }
+    h1 {
+      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.533), 
+                   -3px -3px 5px rgba(255, 255, 255, 0.334);
+    }
+    form {
+      display: inline-block;
+      text-align: left;
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.537);
+      background-color: rgba(169, 169, 169, 0.142);
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    label {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgb(247, 246, 245);
+      padding: 0 5px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    input {
+      width: 500px;
+      padding: 20px;
+      border: 1px solid #161617;
+      border-radius: 5px;
+    }
+    input:focus+label, input:not(:placeholder-shown)+label {
+      transform: translateY(-35px);
+      color: #0051ff;
+    }
+    input:focus {
+      border-color: #0b43ea;
+    }
+    .gender-group {
+      /* display: flex; */
+      align-items: center;
+      /* gap: 5px; */
+      padding-top: 10px;
+
+    }
+    .gender-group label {
+      font-weight: normal;
+      /* display: flex; */
+      align-items: center;
+      /* gap: 10px; */
+      padding-top: 10px;
+      cursor: pointer;
+      position: relative;
+      transform: none;
+    }
+    input[type="radio"] {
+      transform: scale(1.2);
+      cursor: pointer;
+      width: 50px;
+      margin-top:40px;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .details {
+      margin-top: 20px;
+      background-color: #ffffff;
+      padding: 10px;
+      border: 1px solid #4b4848;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Details Form</h1>
+  <form id="studentForm">
+    <div class="form-group">
+      <input type="text" id="name" name="name" placeholder=" " required>
+      <label for="name">Name</label>
+    </div>
+    <div class="form-group">
+      <input type="number" id="age" name="age" placeholder=" " required>
+      <label for="age">Age</label>
+    </div>
+    <div class="form-group">
+      <label>Gender</label>
+      <div class="gender-group">
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+        <label><input type="radio" name="gender" value="Other"> Other</label>
+      </div>
+    </div>
+    <h4>Address</h4>
+    <div class="form-group">
+      <input type="text" id="street" name="street" placeholder=" " required>
+      <label for="street">Street Address</label>
+    </div>
+    <div class="form-group">
+      <input type="text" id="city" name="city" placeholder=" " required>
+      <label for="city">City</label>
+    </div>
+    <div class="form-group">
+      <input type="text" id="state" name="state" placeholder=" " required>
+      <label for="state">State/Province</label>
+    </div>
+    <div class="form-group">
+      <input type="text" id="pin" name="pin" placeholder=" " required>
+      <label for="pin">Zip Code</label>
+    </div>
+    <div class="form-group">
+      <input type="text" id="country" name="country" placeholder=" " required>
+      <label for="country">Country</label>
+    </div>
+    <div class="form-group">
+      <input type="email" id="email" name="email" placeholder=" " required>
+      <label for="email">Email</label>
+    </div>
+    <div class="form-group">
+      <input id="number" name="number" placeholder=" " required>
+      <label for="number">Number</label>
+    </div>
+    <div class="form-group">
+      <input type="text" id="study" name="study" placeholder=" " required>
+      <label for="study">Graduation</label>
+    </div>
+    <div class="button-group">
+      <button type="submit">Submit</button>
+      <button type="button" onclick="editDetails()">Edit Details</button>
+    </div>
+  </form>
+
+  <div class="details" id="details"></div>
+
+  <script>
+    document.getElementById('studentForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      let name = document.getElementById('name').value;
+      let age = document.getElementById('age').value;
+      let gender = document.querySelector('input[name="gender"]:checked')?.value || "Not selected";
+      let street = document.getElementById('street').value;
+      let city = document.getElementById('city').value;
+      let state = document.getElementById('state').value;
+      let pin = document.getElementById('pin').value;
+      let country = document.getElementById('country').value;
+      let email = document.getElementById('email').value;
+      let number = document.getElementById('number').value;
+      let study = document.getElementById('study').value;
+
+      let detailsDiv = document.getElementById('details');
+      detailsDiv.innerHTML = `
+        <h2>Submitted Details</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <p><strong>Gender:</strong> ${gender}</p>
+        <p><strong>Street:</strong> ${street}</p>
+        <p><strong>City:</strong> ${city}</p>
+        <p><strong>State:</strong> ${state}</p>
+        <p><strong>Zip Code:</strong> ${pin}</p>
+        <p><strong>Country:</strong> ${country}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Number:</strong> ${number}</p>
+        <p><strong>Graduation:</strong> ${study}</p>
+      `;
+      detailsDiv.style.display = 'block';
+    });
+
+    function editDetails() {
+      document.getElementById('details').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
